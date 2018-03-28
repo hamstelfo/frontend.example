@@ -5,7 +5,8 @@ Pasos a seguir.
   
   - Inicialización
   - Javscript + Jest
-  - Magic
+  - Typescript + Jest
+  - 
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
@@ -13,7 +14,10 @@ Pasos a seguir.
 
 ### Visual Studio Code
   - Instalar Visual Studio Code
-  - Instalamos la extensión vscode-icons
+  - Instalamos las extensiones Npm y Npm Intellisense
+  - Instalamos la extensión vscode-icons (opcional)
+  - Instalamos la extensión zenburn (opcional)
+  - Abrir Ver > Terminal integrado (ctrl+ñ)
 
 ### Git
   - Preparamos el .gitignore
@@ -22,15 +26,34 @@ Pasos a seguir.
 ### Sistema de ficheros
   - Creamos una carpeta vacía. La podemos ubicar donde queramos, ya que vamos a usar el webserver de webpack, no es necesario xampp ni winNMP, ni ningún otro servidor.
   - javascript.jest
+  - typescript.jest
 
 ## Javascript + Jest
-
 El propósito de este ejemplo es empezar a familiarizarnos con Jest. Vamos símplemente a usar Javascript, así que de momento no será necesario utilizar Webpack.
 
   - En la carpeta javascript.jest vamos a seguir los pasos básicos de [Jest Get Started]
   - Tan sólo comentar que la nomenclatura es importante sum.js > sum.test.js, para que al hacer **npm test**, Jest sepa qué fichero testear automáticamente.
-  - 
-  
+
+## Typescript + Jest
+
+  - Seguimos las instrucciones de [TS Jest].
+  - Nos vamos a la carpeta typescript.jest, donde no tenemos nada inicialmente, así que debemos usar **npm install --save-dev jest ts-jest @types/jest** para instalar jest aquí también, junto cont ts-jest y los tipos.
+  - Configuramos el package.json como dice en el ejemplo.
+  - Nos traemos nuestros ficheros js del ejemplo anterior y los renombramos a tsx.
+  - Transformamos sum.ts en Typescript. y vemos que obtenemos 3 errores en sum.test.ts. Mucho ojo con la carpeta node_modules, porque aparece vacía. Esto puede ser debido a que no está definido como entorno de desarrollo y npm borra pensando q es en producción.
+
+| Error | Solución |
+| ------ | ------ |
+| No se encuentra el nombre 'require'.  | "npm install @types/node --save-dev" y crear tsconfig.json|
+| No se encuentra el nombre 'test'. | tenemos q limpiar la cache y volver a instalar otra vez |
+| No se encuentra el nombre 'test'. | ídem |
+- Ahora, al intentar hacer **npm test**
+
+| Error | Solución |
+| ------ | ------ |
+| Cannot find module 'typescript'. | npm install typescript |
+
+
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
 > as possible. The idea is that a
@@ -168,7 +191,7 @@ MIT
 
 
    [Jest Get Started]: <https://facebook.github.io/jest/docs/en/getting-started.html>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
+   [TS Jest]: <https://github.com/kulshekhar/ts-jest>
    [john gruber]: <http://daringfireball.net>
    [df1]: <http://daringfireball.net/projects/markdown/>
    [markdown-it]: <https://github.com/markdown-it/markdown-it>
