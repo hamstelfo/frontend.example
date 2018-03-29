@@ -37,7 +37,7 @@ El propósito de este ejemplo es empezar a familiarizarnos con Jest. Vamos símp
 ## Typescript + Jest
 
   - Seguimos las instrucciones de [TS Jest].
-  - Nos vamos a la carpeta typescript.jest, donde no tenemos nada inicialmente, así que debemos usar **npm install --save-dev jest ts-jest @types/jest** para instalar jest aquí también, junto cont ts-jest y los tipos.
+  - Nos vamos a la carpeta typescript.jest, donde no tenemos nada inicialmente, así que debemos usar **npm init** y luego **npm install --save-dev jest ts-jest @types/jest** para instalar jest aquí también, junto cont ts-jest y los tipos.
   - Configuramos el package.json como dice en el ejemplo.
   - Nos traemos nuestros ficheros js del ejemplo anterior y los renombramos a tsx.
   - Transformamos sum.ts en Typescript. y vemos que obtenemos 3 errores en sum.test.ts. Mucho ojo con la carpeta node_modules, porque aparece vacía. Esto puede ser debido a que no está definido como entorno de desarrollo y npm borra pensando q es en producción.
@@ -45,13 +45,60 @@ El propósito de este ejemplo es empezar a familiarizarnos con Jest. Vamos símp
 | Error | Solución |
 | ------ | ------ |
 | No se encuentra el nombre 'require'.  | "npm install @types/node --save-dev" y crear tsconfig.json|
-| No se encuentra el nombre 'test'. | tenemos q limpiar la cache y volver a instalar otra vez |
+| No se encuentra el nombre 'test'. | tenemos q limpiar la cache y volver a instalar otra vez y cerrar y abrir el editor de nuevo ¿?¿?¿? **Importante:** en el tsconfig.json, en compilerOptions, meter los tipos de ts-jest y jest|
 | No se encuentra el nombre 'test'. | ídem |
 - Ahora, al intentar hacer **npm test**
 
 | Error | Solución |
 | ------ | ------ |
 | Cannot find module 'typescript'. | npm install typescript |
+
+## React + Typescript + Jest
+Vamos a crearnos un componente lo más básico posible.
+Instalamos las dependencias (podemos tener abierto en package.json mientras instalamos y vemos cómo se van agregando las dependencias en él):
+```sh
+$ cd react.typescript.jest
+$ npm init
+$ npm install react
+$ npm install react-dom
+$ npm i react-addons-shallow-compare
+$ npm i react-virtualized --save
+$ npm i @types/react-virtualized --save-dev
+$ npm install --save-dev jest ts-jest @types/jest
+$ npm install --save-dev react-addons-test-utils enzyme
+$ npm i --save-dev enzyme enzyme-adapter-react-16
+$ npm cache clear --force
+$ npm install
+```
+  - Importante en el tsconfig.json, en compilerOptions, meter los tipos de ts-jest y jest
+  - Importante la primera letra del componente en mayñuscula.
+  - No olvidar meterle esto a package.json
+ ```sh
+"jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+```
+  - Seguimos las instrucciones de [Test React Component Jest + Enzyme] ( a mitad del documento, donde dice **Testing React Components**). 
+  - Trabajamos con "mount" de Enzyme, que nos permite renderizar el componente SIN ejecutarlo en el navegador.
+
+
+| Error | Solución |
+| ------ | ------ |
+| Enzyme expects an adapter to be configured, but found none  | Para solucionar el tema de los adapters: [Enzyme adapters].|
+| Cannot find module 'react/lib/ReactComponentTreeHook' from 'ReactDebugTool.js' | tenemos q limpiar la cache y volver a instalar otra vez y cerrar y abrir el editor de nuevo ¿?¿?¿? **Importante:** en el tsconfig.json, en compilerOptions, meter los tipos de ts-jest y jest|
+| No se encuentra el nombre 'test'. | ídem |
+
 
 
 > The overriding design goal for Markdown's
@@ -192,8 +239,8 @@ MIT
 
    [Jest Get Started]: <https://facebook.github.io/jest/docs/en/getting-started.html>
    [TS Jest]: <https://github.com/kulshekhar/ts-jest>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
+   [Test React Component Jest + Enzyme]: <https://www.sitepoint.com/test-react-components-jest/>
+   [Enzyme adapters]: <https://github.com/airbnb/enzyme/tree/master/packages/enzyme-adapter-react-16>
    [markdown-it]: <https://github.com/markdown-it/markdown-it>
    [Ace Editor]: <http://ace.ajax.org>
    [node.js]: <http://nodejs.org>

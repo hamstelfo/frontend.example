@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "declaration": false,
+      "noImplicitAny": false,
+      "jsx": "react",
+      "sourceMap": true,
+      "noLib": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "types": [ "node", "ts-jest", "jest" ],
+      "typeRoots": [ "../node_modules/@types" ]
+    },
+    "compileOnSave": true,
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
