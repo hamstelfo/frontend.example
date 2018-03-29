@@ -96,9 +96,9 @@ $ npm install
 | Error | Solución |
 | ------ | ------ |
 | Enzyme expects an adapter to be configured, but found none  | Para solucionar el tema de los adapters: [Enzyme adapters].|
-| Cannot find module 'react/lib/ReactComponentTreeHook' from 'ReactDebugTool.js' | tenemos q limpiar la cache y volver a instalar otra vez y cerrar y abrir el editor de nuevo ¿?¿?¿? **Importante:** en el tsconfig.json, en compilerOptions, meter los tipos de ts-jest y jest|
-| No se encuentra el nombre 'test'. | ídem |
-
+| Cannot find module 'react/lib/ReactComponentTreeHook' from 'ReactDebugTool.js' | npm install react-dom@16.2.0 --save|
+| TypeError: Cannot read property 'configure' of undefined | "import { mount, configure } from 'enzyme';" y "configure({ adapter: new Adapter() });"  |
+| TypeError: enzyme_adapter_react_16_1.default is not a constructor | Comentar "import Adapter from 'enzyme-adapter-react-16';" y reemplazar por "const Adapter = require("enzyme-adapter-react-16");"  |
 
 
 > The overriding design goal for Markdown's
@@ -109,30 +109,6 @@ $ npm install
 > looking like it's been marked up with tags
 > or formatting instructions.
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
-
-### Tech
-
-Dillinger uses a number of open source projects to work properly:
-
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ cd dillinger

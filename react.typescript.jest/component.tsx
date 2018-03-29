@@ -9,7 +9,7 @@ export const ExampleComponent: React.StatelessComponent<Props> = (props) => {
     const content= (props.tipo===1)?"popo1":"pipi-otro";
 
     return (
-        <div className={`example-comp`}>${content}</div>
+        <div className={`example-comp`}>{content}</div>
     );
 }
 

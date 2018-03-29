@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { mount, Enzyme } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, configure } from 'enzyme';
+//import Adapter from 'enzyme-adapter-react-16';
+const Adapter = require("enzyme-adapter-react-16");
 import {ExampleComponent} from './component';
 
-Enzyme.configure({ adapter: new Adapter() });
-
+console.log(configure);
 console.log(ExampleComponent);
+
+configure({ adapter: new Adapter() });
+
 
 test('El componente de prueba renderiza el texto correcto "popo1" cuando el tipo es = 1', () => {
     const tipo= 1;
