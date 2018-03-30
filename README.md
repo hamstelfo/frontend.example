@@ -126,9 +126,59 @@ Vamos a agregar esto para que las pruebas se realicen cada vez q se cambia algo:
 ```
 Y nos fijamos en [Redux tests] para crear nuestros tests.
 
-
 ## Publish with Webpack + Redux + React + Typescript + Jest
+Hasta ahora, en nuestros ejemplos, nos ha faltado tanto la transpilación inmediata al guardar, como el poder ver nuestro componente en HTML. Esto lo vamos a hacer con Webpack (copiamos el proyecto anterior). La transpilación inmediata en VSCode, debe hacerse con una tarea programada, como se explica en [Typescript en VSCode].
+Antes de nada, verificamos que todo siga correcto.
+```sh
+$ cd webpack.redux.react.typescript.jest
+$ npm install
+$ npm test 
+```
+También vamos a ir instalando las devtools de Redux.
+```sh
+$ npm install --save-dev redux-devtools-extension
+$ npm install --save redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
+```
+Bien, la primera tarea que le vamos a pedir a Webpack, es que nos transpile Typescript. De todas formas, vamos a instalar varios paquetes que nos van a resultar de utilidad.
+```sh
+$ npm install webpack
+$ npm install html-webpack-plugin --save-dev
+$ npm install awesome-typescript-loader --save-dev
+```
+  - Ahora, tenemos Webpack instalado y podemos usar tanto línea de comandos, como el archivo de configuración webpack.config.js (Ver [Primeros pasos con Webpack]).
+  - Creamos el archivo webpack.config.js (ver comentarios en el propio archivo).
+  - Nos creamos un punto de entrada, que será index.tsx. Además, necesitaremos crear store.ts para alimentar al punto de entrada con Redux.
+  - Nota: los "loaders" de Webpack 1 son "rules" en Webpack 2.
+  - Utilizaremos el loader "awesome-typescript-loader" para Typescript.
+  - Le metemos el sevServer, el script "start" y devtool. 
+  - Hacemos npm start (salen algunos errores q se van solucionando rápidamente).
+  - Errores más serios:
+  - 
+  | Error | Solución |
+| ------ | ------ |
+| events.js:183 throw er; // Unhandled 'error' event Error: listen EADDRINUSE 127.0.0.1:8081 | Eso es que el puerto del devServer está ocupado (webpack.config.js)|
+| WARNING in configuration
+The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment. | En webpack.config.js: mode: 'development',|
+| Da problema con la ubicación de archivos. | Refactorizar y poner en carpetas adecuadas.|
+|En el navegador: Cannot GET /| No se han creado ninguno de los archivos js >> tenemos q crear el index.html con el <div id="root"></div> |
+|Rulando webpack, al guardar un tsx > TypeError: Cannot read property '_tsInstances' of undefined|npm install awesome-typescript-loader@5.0.0-1|
+| Cuando creamos el index.html > ERROR in   TypeError: compilation.templatesPlugin is not a function | Vamos a cubrir todos los warnings de npm install:|
+||npm install webpack@4.0.0|
+||npm install react-dom@6.0.0|
+||npm install ajv@6.0.0|
+||npm install webpack-dev-server|
+||npm install webpack-cli -D|
 
+Por último, instalamos React-hot-loader
+```sh
+$ npm install --save-dev react-hot-loader
+Editamos el componente...
+En package.json >> "start": "webpack-dev-server --hot"
+```
+Parece que npm test:watch no va, pero sí podemos hacer directamente
+```sh
+npm test -- --watch
+```
 ## Export component in npm + Redux + React + Typescript + Jest
 
 
@@ -157,18 +207,5 @@ Y nos fijamos en [Redux tests] para crear nuestros tests.
    [Test React Component Jest + Enzyme]: <https://www.sitepoint.com/test-react-components-jest/>
    [Enzyme adapters]: <https://github.com/airbnb/enzyme/tree/master/packages/enzyme-adapter-react-16>
    [Redux tests]: <https://github.com/reactjs/redux/blob/master/docs/recipes/WritingTests.md>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+   [Typescript en VSCode]: <https://elabismodenull.wordpress.com/2016/09/15/typescript-para-nodejs-usando-visual-studio-code/>
+   [Primeros pasos con Webpack]: <https://carlosazaustre.es/primeros-pasos-con-webpack/>
