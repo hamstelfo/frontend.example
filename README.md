@@ -100,6 +100,40 @@ $ npm install
 | TypeError: Cannot read property 'configure' of undefined | "import { mount, configure } from 'enzyme';" y "configure({ adapter: new Adapter() });"  |
 | TypeError: enzyme_adapter_react_16_1.default is not a constructor | Comentar "import Adapter from 'enzyme-adapter-react-16';" y reemplazar por "const Adapter = require("enzyme-adapter-react-16");"  |
 
+## Redux + React + Typescript + Jest
+Cogemos como muestra el proyecto anterior, y sobre él vamos a generar nuestra capa Redux.
+```sh
+$ cd redux.react.typescript.jest
+$ npm install
+$ npm test 
+```
+Podemos comprobar que todo sigue funcionando.. Ahora vamos a meterle Redux.
+```sh
+$ npm install redux react-redux redux-logger redux-thunk redux-promise-middleware -S
+```
+Ahora vamos a refactorizar para poder trabajar con Redux.
+Vamos a agregar esto para que las pruebas se realicen cada vez q se cambia algo:
+```sh
+{
+  ...
+  "scripts": {
+    ...
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  ...
+}
+```
+Y nos fijamos en [Redux tests] para crear nuestros tests.
+
+
+## Publish with Webpack + Redux + React + Typescript + Jest
+
+## Export component in npm + Redux + React + Typescript + Jest
+
+
+
+
 
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
@@ -110,102 +144,7 @@ $ npm install
 > or formatting instructions.
 
 
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
 
-For production environments...
-
-```sh
-$ npm install --production
-$ NODE_ENV=production node app
-```
-
-### Plugins
-
-Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| Github | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
-
-
-### Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma test
-```
-#### Building for source
-For production release:
-```sh
-$ gulp build --prod
-```
-Generating pre-built zip archives for distribution:
-```sh
-$ gulp build dist --prod
-```
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 8080, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
-
-```sh
-cd dillinger
-docker build -t joemccann/dillinger:${package.json.version}
-```
-This will create the dillinger image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of Dillinger.
-
-Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:${package.json.version}
-```
-
-Verify the deployment by navigating to your server address in your preferred browser.
-
-```sh
-127.0.0.1:8000
-```
-
-#### Kubernetes + Google Cloud
-
-See [KUBERNETES.md](https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md)
-
-
-### Todos
-
- - Write MORE Tests
- - Add Night Mode
-
-License
-----
-
-MIT
 
 
 
@@ -217,7 +156,7 @@ MIT
    [TS Jest]: <https://github.com/kulshekhar/ts-jest>
    [Test React Component Jest + Enzyme]: <https://www.sitepoint.com/test-react-components-jest/>
    [Enzyme adapters]: <https://github.com/airbnb/enzyme/tree/master/packages/enzyme-adapter-react-16>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
+   [Redux tests]: <https://github.com/reactjs/redux/blob/master/docs/recipes/WritingTests.md>
    [Ace Editor]: <http://ace.ajax.org>
    [node.js]: <http://nodejs.org>
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
